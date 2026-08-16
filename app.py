@@ -354,16 +354,20 @@ if uploaded_file is not None:
     # Images — centered and bigger
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown("""
-        <div class="img-card">
-            <div class="img-card-header">
-                <div class="img-card-dot-white"></div>
-                Original X-Ray
-            </div>
-            <div class="img-card-body">
-        """, unsafe_allow_html=True)
-        st.image(uploaded_file, use_column_width=True)
-        st.markdown('</div></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="img-card">
+        <div class="img-card-header">
+            <div class="img-card-dot-white"></div>
+            Original X-Ray
+        </div>
+        <div class="img-card-body">
+    """, unsafe_allow_html=True)
+
+    uploaded_file.seek(0)          # Reset file pointer
+    original_image = Image.open(uploaded_file)
+    st.image(original_image, use_container_width=True)
+
+    st.markdown('</div></div>', unsafe_allow_html=True)
 
     with col2:
         st.markdown(f"""
