@@ -362,11 +362,7 @@ if uploaded_file is not None:
         </div>
         <div class="img-card-body">
     """, unsafe_allow_html=True)
-
-    uploaded_file.seek(0)          # Reset file pointer
-    original_image = Image.open(uploaded_file)
-    st.image(original_image, use_container_width=True)
-
+    st.image(uploaded_file, use_column_width=True)
     st.markdown('</div></div>', unsafe_allow_html=True)
 
     with col2:
