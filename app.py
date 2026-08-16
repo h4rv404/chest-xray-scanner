@@ -350,10 +350,11 @@ if uploaded_file is not None:
         <div class="pf-badge">{preds[top_index]*100:.1f}% confidence</div>
     </div>
     """, unsafe_allow_html=True)
+    
+   # Images — centered and bigger
+col1, col2 = st.columns(2)
 
-    # Images — centered and bigger
-    col1, col2 = st.columns(2)
-    with col1:
+with col1:
     st.markdown("""
     <div class="img-card">
         <div class="img-card-header">
@@ -362,20 +363,30 @@ if uploaded_file is not None:
         </div>
         <div class="img-card-body">
     """, unsafe_allow_html=True)
-    st.image(uploaded_file, use_column_width=True)
-    st.markdown('</div></div>', unsafe_allow_html=True)
 
-    with col2:
-        st.markdown(f"""
-        <div class="img-card">
-            <div class="img-card-header">
-                <div class="img-card-dot-red"></div>
-                AI Heatmap — {LABELS[top_index]}
-            </div>
-            <div class="img-card-body">
-        """, unsafe_allow_html=True)
-        st.image(result_img, use_column_width=True)
-        st.markdown('</div></div>', unsafe_allow_html=True)
+    st.image(uploaded_file, use_container_width=True)
+
+    st.markdown("""
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown(f"""
+    <div class="img-card">
+        <div class="img-card-header">
+            <div class="img-card-dot-red"></div>
+            AI Heatmap — {LABELS[top_index]}
+        </div>
+        <div class="img-card-body">
+    """, unsafe_allow_html=True)
+
+    st.image(result_img, use_container_width=True)
+
+    st.markdown("""
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     # Results
     detected = sorted([(l, s) for l, s in zip(LABELS, preds) if s > 0.5], key=lambda x: x[1], reverse=True)
